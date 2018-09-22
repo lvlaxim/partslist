@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+    <br><br>
+    <div>
+        <a th:href="@{'/sort/{sortDate}' (sortDate = 'ALL')}">Все<i class="fa fa-chevron-circle-down"></i></a>
+        <a th:href="@{'/sort/{sortDate}' (sortDate = 'NECESSARY')}">Необходимые<i class="fa fa-chevron-circle-down"></i></a>
+        <a th:href="@{'/sort/{sortDate}' (sortDate = 'OPTIONAL')}">Опциональные<i class="fa fa-chevron-circle-down"></i></a>
+        <form class="form-horizontal" th:action="@{/find}" name="input_form" id="input_form"
+              method="post" role="form">
+            <div class="form-group">
+                <input type="text" class="form-control" id="pattern" th:name="pattern" placeholder="Наименование" maxlength="100"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Найти</button>
+        </form>
+    </div>
+    <br><br>
+    <div th:if="${not #lists.isEmpty(page)}">
+        <div th:replace="operations/list :: partsList"></div>
+    </div>
+    <br><br>
+    <div>Можно собрать <snap th:text="${fullSetCount}">Count</snap> компьютеров.</div>
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>
